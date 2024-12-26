@@ -10,7 +10,7 @@ class Boulangerie {
     }
     ecrire() {
         console.log(`${this.nom} est une boulangerie`);
-        
+        console.log(`${this.nom} embauche ${this.employes} employes`);
         
     }
 }
@@ -18,18 +18,34 @@ class Boulangerie {
 class Fabrication {
     produit;
     quantite;
-    constructor(produit, quantite) {
+    prix;
+    cout;
+    constructor(produit, quantite, prix, cout) {
         this.produit = produit;
         this.quantite = quantite;
+        this.prix = prix;
+        this.cout = cout;
     }
 }
 
 class Produit {
     nom;
     prix;
-    constructor(nom) {
+    cout
+    constructor(nom, prix, cout) {
         this.nom = nom;
-        console.log(`${this.nom} est un produit`)
+        this.prix = prix;
+        this.cout = cout;
+        console.log(`${this.nom} est un produit (${this.cout} / ${this.prix})`);
+    }
+}
+
+class Patisserie extends Produit {
+    estPatisserie;
+    constructor(nom, prix, cout, estPatisserie) {
+        super(nom, prix, cout);
+        this.estPatisserie = estPatisserie;
+        console.log(`${this.nom} est une patisserie au beurre`);
     }
 }
 
@@ -60,6 +76,19 @@ class Patissier extends Employe {
         super(prenom);
         this.fabrications = [];
         console.log(`${this.prenom} est un patissier`);
+    }
+}
+
+class Vendeuse extends Employe {
+    ventes;
+    constructor(prenom) {
+        super(prenom);
+        this.ventes = [];
+        console.log(`${this.prenom} est une vendeuse`);
+    }
+    vendre(produit, quantite) {
+        this.ventes.push(new Fabrication(produit, quantite));
+        console.log(`${this.prenom} vend ${quantite} ${produit.nom}`);
     }
 }
 
